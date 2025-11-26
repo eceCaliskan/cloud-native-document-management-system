@@ -26,7 +26,7 @@ export class Login {
   buttonList: LoginFormType[];
 
     constructor(){
-      this.formName = 'Login Form';
+      this.formName = 'Login';
       this.buttonText = 'Login';
       this.buttonList = [
         {name: 'email', icon: 'email', placeholder: 'Enter your email'},
