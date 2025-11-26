@@ -1,3 +1,6 @@
+/*
+@author    : Ece Caliskan <
+*/
 import { Component } from '@angular/core';
 import {  MatButtonModule } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
@@ -6,9 +9,9 @@ import {  MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
 export interface LoginFormType {
-  name: String,
-  icon: String,
-  placeholder: String
+  name: string,
+  icon: string,
+  placeholder: string
 }
 
 @Component({
