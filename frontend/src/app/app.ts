@@ -5,7 +5,7 @@ import { Appbar } from './component/templates/appbar/appbar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Login, Appbar],
+  imports: [RouterOutlet,  Appbar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
