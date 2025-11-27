@@ -10,6 +10,6 @@
                 <mat-icon matSuffix>{{ button.icon }}</mat-icon>
             </mat-form-field>
         }       
-    <button matButton="filled" color="primary">{{ buttonText }}</button>
+    <button matButton="filled" (click)="onLogin()" color="primary">{{ buttonText }}</button>
     </mat-card>
 </div>

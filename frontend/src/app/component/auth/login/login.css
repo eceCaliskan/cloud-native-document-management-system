@@ -39,8 +39,8 @@ button {
 img {
   width: 50%;
   height: 100vh;
-  /* padding: 30px; */
-  /* border-radius: 20%; */
+  
+  opacity: 0.8;
 }
 
 .login-container {
