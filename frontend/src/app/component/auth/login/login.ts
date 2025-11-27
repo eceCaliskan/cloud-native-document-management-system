@@ -24,6 +24,7 @@ export class Login {
   formName: string;
   buttonText: string;
   buttonList: LoginFormType[];
+  imagePath: string;
 
     constructor(){
       this.formName = 'Login';
@@ -31,5 +32,6 @@ export class Login {
       this.buttonList = [
         {name: 'email', icon: 'email', placeholder: 'Enter your email'},
         {name: 'password', icon: 'lock', placeholder: 'Enter your password'}];
+      this.imagePath = 'assets/images/image.png';
     }
 }
