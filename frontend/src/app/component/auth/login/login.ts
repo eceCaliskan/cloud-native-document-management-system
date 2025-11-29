@@ -7,6 +7,7 @@ import { MatCard } from '@angular/material/card';
 import {MatFormFieldModule, MatLabel} from '@angular/material/form-field';
 import {  MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
 
 export interface LoginFormType {
   name: string,
@@ -23,10 +24,10 @@ export interface LoginFormType {
 export class Login {
   formName: string;
   buttonText: string;
-  buttonList: LoginFormType[];
   imagePath: string;
+  buttonList: LoginFormType[];
 
-    constructor(){
+    constructor(private router: Router){
       this.formName = 'Login';
       this.buttonText = 'Login';
       this.buttonList = [
@@ -34,4 +35,9 @@ export class Login {
         {name: 'password', icon: 'lock', placeholder: 'Enter your password'}];
       this.imagePath = 'assets/images/image.png';
     }
+    
+
+    onLogin() {
+      console.log('hiiii')
+       this.router.navigate(['/list']);}
 }
