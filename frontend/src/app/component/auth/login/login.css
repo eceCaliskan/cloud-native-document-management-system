@@ -19,30 +19,9 @@
 }
 
 mat-form-field {
-  width: 100%;
   height: 15%;
-  margin-bottom: 20px;
-  color: white;
   border-radius: 15%;
 }
 
-input {
-  width: 100%;
-  height: 10px;
-}
 
-button {
-  width: 30%;
-  align-self: flex-end;
-}
 
-img {
-  width: 50%;
-  height: 100vh;
-  
-  opacity: 0.8;
-}
-
-.login-container {
-  display: flex;
-}
