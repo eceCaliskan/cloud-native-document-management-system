@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCard, MatCardModule } from '@angular/material/card';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
@@ -24,7 +25,7 @@ const ELEMENT_DATA: DocumentListInterface[] = [
 
 @Component({
   selector: 'app-document-list',
-  imports: [MatTableModule, MatCard, MatPaginatorModule, MatIconModule, MatFormFieldModule, MatInputModule],
+  imports: [MatTableModule, MatCard, MatPaginatorModule, MatIconModule, MatFormFieldModule, MatInputModule, MatButtonModule],
   templateUrl: './document-list.html',
   styleUrl: './document-list.css',
 })
