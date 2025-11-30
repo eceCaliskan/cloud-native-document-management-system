@@ -80,13 +80,18 @@ docker-compose up --build
 
 ## 🔧 **Environment Variables**
 
-Create a `.env` file:
+Create a `environment.ts` file in frontend/src folder:
 
 ```ini
-GCP_BUCKET_NAME=your-bucket
-FIREBASE_API_KEY=your-key
-FIREBASE_AUTH_DOMAIN=your-domain
-REGION_MODE=cost-aware
+export const FirebaseConfig={
+        apiKey: your-api-key,
+        authDomain: your-auth-domain,
+        projectId: your-project-id,
+        storageBucket: your-storage-bucket,
+        messagingSenderId: your-sender-id,
+        appId: your-app-id,
+        measurementId: your-measurement-id
+      }
 ```
 
 ---
