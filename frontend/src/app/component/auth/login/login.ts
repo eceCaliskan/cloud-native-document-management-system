@@ -36,8 +36,10 @@ export class Login {
       this.imagePath = 'assets/images/image.png';
     }
     
-
+    /**
+     * Handles the login action and navigates to the document list page.
+     * 
+     */
     onLogin() {
-      console.log('hiiii')
-       this.router.navigate(['/list']);}
+      this.router.navigate(['/list']);}
 }

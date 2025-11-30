@@ -1,1 +1,26 @@
 @use '@angular/material' as mat;
+
+.register-form, .login-form {
+  width: 35vw;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  margin: 10vh auto;
+  padding: 30px;
+  border: 1px solid rgba(204, 204, 204, 0.16);
+  border-radius: 5px;
+  box-shadow: 0 12px 15px rgba(0, 0, 0, 0.9);
+  justify-content: center;
+ }
+
+ #formLabel {
+  margin-bottom: 30px;
+  font-size: xx-large;
+  text-align: center;
+  padding-bottom: 10%;
+}
+
+mat-form-field {
+  height: 15%;
+  border-radius: 15%;
+}
