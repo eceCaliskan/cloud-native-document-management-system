@@ -8,13 +8,25 @@
     #stepper
     class="bg-transparent text-align-center"
   >
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup" class="d-flex">
+    <mat-step [stepControl]="projectNameFormGroup">
+      <form [formGroup]="projectNameFormGroup" class="d-flex">
         <ng-template matStepLabel>Enter your Project Name</ng-template>
         <mat-form-field>
           <mat-label>Project Name</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. Project 1" required />
+          <input matInput formControlName="projectNameCtrl" placeholder="Ex. Project 1" required/>
         </mat-form-field>
+        <div class="m-2">
+          <button matButton="filled"  matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="regionPreferenceFormGroup">
+      <form [formGroup]="regionPreferenceFormGroup"class="d-flex">
+        <ng-template matStepLabel>Select Datacenter Region Preference</ng-template>
+        <mat-button-toggle-group formControlName="regionPreferenceCtrl" name="fontStyle" aria-label="Font Style">
+          <mat-button-toggle value="greener">Greener Region</mat-button-toggle>
+          <mat-button-toggle value="cheaper">Cheaper Region</mat-button-toggle>
+        </mat-button-toggle-group>
         <div class="m-2">
           <button matButton="filled" matStepperNext>Next</button>
         </div>
@@ -22,22 +34,10 @@
     </mat-step>
     <mat-step >
       <form class="d-flex">
-        <ng-template matStepLabel>Select Datacenter Region Preference</ng-template>
-        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-          <mat-button-toggle value="bold">Greener Region</mat-button-toggle>
-          <mat-button-toggle value="italic">Cheaper Region</mat-button-toggle>
-        </mat-button-toggle-group>
-        <div class="m-2">
-          <button matButton="filled" matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup" class="d-flex">
         <ng-template matStepLabel>Upload your Document</ng-template>
-        <input type="file" formControlName="secondCtrl" />
+        <input type="file"  (change)="onFileSelected($event)"/>
         <div class="m-2 d-flex">
-          <button matButton="filled" matStepperNext>Upload File</button>
+          <button matButton="filled" matStepperNext (click)="uploadFile()">Upload File</button>
         </div>
       </form>
     </mat-step>
