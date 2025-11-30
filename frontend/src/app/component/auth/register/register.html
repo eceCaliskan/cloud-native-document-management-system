@@ -1,0 +1,23 @@
+<div class="d-flex">
+  <img [src]="imagePath" alt="Logo" class="opacity-50 w-50 vh-100" />
+  <mat-card class="register-form">
+    <h2 id="formLabel">{{ formName }}</h2>
+    <!--Create textfields for the form-->
+    @for (button of buttonList; track button.name) {
+    <mat-form-field [formGroup]="userRegisterFormGroup" class="w-100 mb-4 text-white" appearance="fill">
+      <mat-label>{{ button.placeholder }}</mat-label>
+      <input
+        formControlName="{{ button.inputControl }}"
+        class="vw-100 h-10"
+        matInput
+        [placeholder]="button.placeholder"
+        [type]="button.name"
+      />
+      <mat-icon matSuffix>{{ button.icon }}</mat-icon>
+    </mat-form-field>
+    }
+    <button matButton="filled" class="w-50 align-self-end" (click)="onRegister()" color="primary">
+      {{ buttonText }}
+    </button>
+  </mat-card>
+</div>

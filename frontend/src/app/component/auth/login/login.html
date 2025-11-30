@@ -4,12 +4,13 @@
         <h2 id="formLabel">{{ formName }}</h2>
         <!--Create textfields for the form-->
         @for (button of buttonList; track button.name) {
-            <mat-form-field class="w-100 mb-4 text-white" appearance="fill">
+            <mat-form-field [formGroup]="userLoginFormGroup" class="w-100 mb-4 text-white" appearance="fill">
                 <mat-label>{{ button.placeholder }}</mat-label>
-                <input class="vw-100 h-10" matInput [placeholder]="button.placeholder" [type]=button.name>
+                <input [formControlName]="button.inputControl" class="vw-100 h-10" matInput [placeholder]="button.placeholder" [type]=button.name>
                 <mat-icon matSuffix>{{ button.icon }}</mat-icon>
             </mat-form-field>
         }       
     <button matButton="filled" class="w-50 align-self-end" (click)="onLogin()" color="primary">{{ buttonText }}</button>
-    </mat-card>
+    <mat-label class="mt-3"> Not a member? please register <a href="/register" style="cursor: default;"><i>here</i></a></mat-label>    
+</mat-card>
 </div>
