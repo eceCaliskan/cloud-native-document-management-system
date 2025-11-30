@@ -7,13 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { MaterialModule } from '../../../shared/material-import';
-export interface LoginFormType {
-  name: string,
-  icon: string,
-  placeholder: string,
-  inputFormGroup: FormGroup
-  inputControl: string
-}
+import { LoginFormType } from '../../../model/form-model';
+
 @Component({
   selector: 'app-register',
   imports: [MaterialModule, MatFormFieldModule, MatFormFieldModule, MatLabel, MatInputModule, MatIconModule, MatButtonModule, MatCard],
