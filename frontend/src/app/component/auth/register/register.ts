@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { MaterialModule } from '../../../shared/material-import';
 import { LoginFormType } from '../../../model/form-model';
 import { AuthService } from '../../../service/auth/auth-service';
+import { User } from '../../../model/user-model';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class Register {
   imagePath: string;
   buttonList: LoginFormType[];
   userRegisterFormGroup: FormGroup;
-  user: { email: string; password: string; role: string };
+  user: User ;
 
   constructor(private router: Router, private authService: AuthService) {
     this.formName = 'Register';
@@ -66,7 +67,7 @@ export class Register {
       },
     ];
     this.imagePath = 'assets/images/image.png';
-    this.user = { email: '', password: '', role: '' };
+    this.user = { email: '', password: '' };
   }
 
   /**
@@ -79,6 +80,7 @@ export class Register {
     this.authService.firebaseSignUp(this.user, role).then((userCredential) => {
         const user = userCredential.user;
         console.log('User created:', user.uid);
+        this.router.navigate(['/list']);
         // You can now send user.uid to your backend to assign roles
         // example:
         // this.http.post("/assign-role", { uid: user.uid })
