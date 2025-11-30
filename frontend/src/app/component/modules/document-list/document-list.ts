@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCard, MatCardModule } from '@angular/material/card';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { DocumentUpload } from '../document-upload/document-upload';
+import { MaterialModule } from '../../../shared/material-import';
 
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 export interface DocumentListInterface {
   projectID: number;
   projectName: string;
@@ -15,34 +11,35 @@ export interface DocumentListInterface {
 }
 
 const ELEMENT_DATA: DocumentListInterface[] = [
-  {projectID: 1, projectName: 'Project 1', author: 'Author 1', actions: 'Action 1'},
-  {projectID: 2, projectName: 'Project 2', author: 'Author 2', actions: 'Action 2'},
-  {projectID: 3, projectName: 'Project 3', author: 'Author 3', actions: 'Action 3'},
-  {projectID: 4, projectName: 'Project 4', author: 'Author 4', actions: 'Action 4'},
-  {projectID: 5, projectName: 'Project 5', author: 'Author 5', actions: 'Action 5'},
- 
+  { projectID: 1, projectName: 'Project 1', author: 'Author 1', actions: 'Action 1' },
+  { projectID: 2, projectName: 'Project 2', author: 'Author 2', actions: 'Action 2' },
+  { projectID: 3, projectName: 'Project 3', author: 'Author 3', actions: 'Action 3' },
+  { projectID: 4, projectName: 'Project 4', author: 'Author 4', actions: 'Action 4' },
+  { projectID: 5, projectName: 'Project 5', author: 'Author 5', actions: 'Action 5' },
 ];
 
 @Component({
   selector: 'app-document-list',
-  imports: [MatTableModule, MatCard, MatPaginatorModule, MatIconModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [MaterialModule, DocumentUpload],
   templateUrl: './document-list.html',
   styleUrl: './document-list.css',
 })
 export class DocumentList {
   displayedColumns: string[];
-  filter: {filterLabel:string, placeholder:string};
+  filter: { filterLabel: string; placeholder: string };
   dataSource: MatTableDataSource<DocumentListInterface>;
+  isUploadSectionOpen: boolean;
 
   constructor() {
     this.displayedColumns = ['projectID', 'projectName', 'author', 'actions'];
-    this.filter = {filterLabel: 'Filter', placeholder: 'Enter filter text'};
+    this.filter = { filterLabel: 'Filter', placeholder: 'Enter filter text' };
     this.dataSource = new MatTableDataSource(ELEMENT_DATA);
+    this.isUploadSectionOpen = false;
   }
 
   /**
    * Applies a filter to the data source based on the input event.
-   * @param event 
+   * @param event
    */
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
