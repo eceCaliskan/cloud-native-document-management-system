@@ -1,6 +1,6 @@
 <mat-card class="p-3 m-2">
   <span class="d-flex">
-    <span class="w-100 pe-1">
+    <span class="w-100 pe-3">
       <div class="d-flex">
         <mat-form-field class="w-100">
           <mat-label>{{ filter.filterLabel }}</mat-label>
@@ -31,6 +31,10 @@
             <button matMiniFab title="Download Document">
               <mat-icon>cloud_download</mat-icon>
             </button>
+            <!--ROLE BASED ACCESS CONTROL-->
+            <button matMiniFab class="ms-3" title="Download Document">
+              <mat-icon>done</mat-icon>
+            </button>
           </td>
         }
         </ng-container>
@@ -47,10 +51,10 @@
       </mat-paginator>
     </span>
     @if(isUploadSectionOpen){
-    <mat-divider [vertical]="true"></mat-divider>
-    <span class="w-50">
-      <app-document-upload></app-document-upload>
-    </span>
+      <mat-divider [vertical]="true"></mat-divider>
+      <span class="w-50">
+        <app-document-upload></app-document-upload>
+      </span>
     }
   </span>
 </mat-card>
