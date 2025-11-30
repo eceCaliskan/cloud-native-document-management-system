@@ -39,5 +39,14 @@ export class AuthService {
   firebaseSignIn(user: User): Promise<any> {
     return signInWithEmailAndPassword(this.auth, user.email, user.password);
   }
+
+  /**
+   * Signs out the currently logged-in user.
+   * 
+   * @returns Promise that resolves when the user is signed out. 
+   */
+  firebaseSignOut(): Promise<void> {
+    return this.auth.signOut();
+  }
    
 }
