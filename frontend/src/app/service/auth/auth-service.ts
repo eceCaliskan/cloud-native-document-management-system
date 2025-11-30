@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { User } from '../../model/user-model';
 import {
   Auth,
   createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
 } from '@angular/fire/auth';
-import { User } from '../../model/user-model';
+
 
 @Injectable({
   providedIn: 'root',
@@ -27,4 +28,16 @@ export class AuthService {
   firebaseSignUp(user: User, role: string): Promise<any> {
    return createUserWithEmailAndPassword(this.auth, user.email, user.password)     
   }
+
+  /**
+   * Logs in a user with email and password.
+   * 
+   * @param email  The user's email.
+   * @param password  The user's password.
+   * @returns  Promise resolving to the user credentials.
+   */
+  firebaseSignIn(user: User): Promise<any> {
+    return signInWithEmailAndPassword(this.auth, user.email, user.password);
+  }
+   
 }
