@@ -1,0 +1,15 @@
+.mat-horizontal-stepper-wrapper {
+  width: 90% !important;
+}
+
+ng-template {
+  margin-bottom: 15%;
+}
+
+:host ::ng-deep .mat-horizontal-stepper-header-container{
+  margin-bottom: 5%;
+}
+
+body{
+  background-color: red;
+}
