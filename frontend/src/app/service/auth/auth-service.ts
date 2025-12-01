@@ -63,4 +63,15 @@ export class AuthService {
       response.json()
     });
   }
+
+  /**
+   * Extracts the user role from the ID token.
+   * 
+   * @param userCredential
+   * @param role 
+   */
+  setUserRoleToLocalStorage(role: string): void {
+    localStorage.setItem('user_role', role);
+  }
+  
 }

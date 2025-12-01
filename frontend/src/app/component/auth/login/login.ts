@@ -14,6 +14,7 @@ import { LoginFormType } from '../../../model/form-model';
 import { AuthService } from '../../../service/auth/auth-service';
 import { User } from '../../../model/user-model';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserCredential } from 'firebase/auth';
 
 @Component({
   selector: 'app-login',
@@ -79,12 +80,13 @@ export class Login {
   /**
    * Connects to the authentication provider to sign in the user.
    */
-  private _connectToAuthService() {
+  private _connectToAuthService() : void {
     this.authService
       .firebaseSignIn(this.user)
-      .then(async (userCredential) => {
+      .then(async (userCredential: UserCredential) => {
         const token =  await userCredential.user.getIdTokenResult(true); // <— refresh token
-        console.log(token); 
+        const userRole: string = token.claims['admin'] === true ? 'admin' : 'user'
+        this.authService.setUserRoleToLocalStorage(userRole);
         this._signInSuccess();
       })
       .catch((error) => {
@@ -95,7 +97,7 @@ export class Login {
   /**
    * Handles successful sign-in actions.
    */
-  private _signInSuccess() {
+  private _signInSuccess(): void {
     this._snackBar.open('User logged in successfully', 'Close', { duration: 3000 } );
     this.router.navigate(['/list']);
   }
@@ -103,7 +105,7 @@ export class Login {
   /**
    * Handles failed sign-in actions.
    */
-  private _signInFailure() {
+  private _signInFailure() : void {
     this._snackBar.open('Login failed', 'Close', { duration: 3000 } );
   } 
 }

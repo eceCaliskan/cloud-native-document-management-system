@@ -11,7 +11,7 @@ import { LoginFormType } from '../../../model/form-model';
 import { AuthService } from '../../../service/auth/auth-service';
 import { User } from '../../../model/user-model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { UserCredential } from 'firebase/auth';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +24,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatIconModule,
     MatButtonModule,
     MatCard,
-   
   ],
   templateUrl: './register.html',
   styleUrl: './register.css',
@@ -35,13 +34,13 @@ export class Register {
   imagePath: string;
   buttonList: LoginFormType[];
   userRegisterFormGroup: FormGroup;
-  user: User ;
+  user: User;
   private _snackBar = inject(MatSnackBar);
 
   constructor(private router: Router, private authService: AuthService) {
     this.formName = 'Register';
     this.buttonText = 'Register';
-   
+
     this.userRegisterFormGroup = new FormGroup({
       emailInputCtrl: new FormControl(''),
       passwordInputCtrl: new FormControl(''),
@@ -77,26 +76,23 @@ export class Register {
   /**
    * Handles the register action and navigates to the document list page.
    */
-  onRegister() {
+  onRegister() : void {
     this.user.email = this.userRegisterFormGroup.value.emailInputCtrl;
     this.user.password = this.userRegisterFormGroup.value.passwordInputCtrl;
     const role = this.userRegisterFormGroup.value.roleInputCtrl;
     this._connectToAuthService(role);
-    
   }
-  
+
   /**
    *  Connects to the authentication provider to sign up the user.
-   * 
-   * @param role 
+   *
+   * @param role
    */
-  private _connectToAuthService(role: string) {
-    this.authService.firebaseSignUp(this.user, role).then(async (userCredential) => {
-        console.log('User registered:', userCredential.user.uid);
-        this.authService.setUserRole(userCredential.user.uid, role);
-        const token =  await userCredential.user.getIdTokenResult(true); // <— refresh token
-        console.log(token); 
-        this._signUpSuccess(userCredential);
+  private _connectToAuthService(role: string): void {
+    this.authService
+      .firebaseSignUp(this.user, role)
+      .then(async (userCredential: UserCredential ) => {
+        this._signUpSuccess(userCredential, role);
       })
       .catch((error) => {
         this._signUpFailure();
@@ -105,21 +101,20 @@ export class Register {
 
   /**
    *  Handles successful sign-up actions.
-   * 
-   * @param userCredential 
+   *
+   * @param userCredential
    */
-  private _signUpSuccess(userCredential: any) {
+  private _signUpSuccess(userCredential: UserCredential, role: string): void {
     const user = userCredential.user;
-    console.log('User created:', user.uid);
-    this._snackBar.open('User registered successfully', 'Close', { duration: 3000 } );
+    this.authService.setUserRole(userCredential.user.uid, role);
+    this._snackBar.open('User registered successfully', 'Close', { duration: 3000 });
     this.router.navigate(['/']);
   }
 
   /**
    * Handles failed sign-up actions.
    */
-  private _signUpFailure() {
-    this._snackBar.open('Registration failed', 'Close', { duration: 3000 } );
-  } 
-  
+  private _signUpFailure(): void {
+    this._snackBar.open('Registration failed', 'Close', { duration: 3000 });
+  }
 }
