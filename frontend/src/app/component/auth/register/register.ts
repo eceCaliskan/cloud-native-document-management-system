@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
@@ -10,6 +10,7 @@ import { MaterialModule } from '../../../shared/material-import';
 import { LoginFormType } from '../../../model/form-model';
 import { AuthService } from '../../../service/auth/auth-service';
 import { User } from '../../../model/user-model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -23,6 +24,7 @@ import { User } from '../../../model/user-model';
     MatIconModule,
     MatButtonModule,
     MatCard,
+   
   ],
   templateUrl: './register.html',
   styleUrl: './register.css',
@@ -34,10 +36,12 @@ export class Register {
   buttonList: LoginFormType[];
   userRegisterFormGroup: FormGroup;
   user: User ;
+  private _snackBar = inject(MatSnackBar);
 
   constructor(private router: Router, private authService: AuthService) {
     this.formName = 'Register';
     this.buttonText = 'Register';
+   
     this.userRegisterFormGroup = new FormGroup({
       emailInputCtrl: new FormControl(''),
       passwordInputCtrl: new FormControl(''),
@@ -77,18 +81,44 @@ export class Register {
     this.user.email = this.userRegisterFormGroup.value.emailInputCtrl;
     this.user.password = this.userRegisterFormGroup.value.passwordInputCtrl;
     const role = this.userRegisterFormGroup.value.roleInputCtrl;
+    this._connectToAuthService(role);
+    
+  }
+  
+  /**
+   *  Connects to the authentication provider to sign up the user.
+   * 
+   * @param role 
+   */
+  private _connectToAuthService(role: string) {
     this.authService.firebaseSignUp(this.user, role).then((userCredential) => {
-        const user = userCredential.user;
-        console.log('User created:', user.uid);
-        this.router.navigate(['/list']);
+        this._signUpSuccess(userCredential);
         // You can now send user.uid to your backend to assign roles
         // example:
         // this.http.post("/assign-role", { uid: user.uid })
       })
       .catch((error) => {
-        console.error('Error during sign up:', error);
+        this._signUpFailure();
       });
   }
-  
+
+  /**
+   *  Handles successful sign-up actions.
+   * 
+   * @param userCredential 
+   */
+  private _signUpSuccess(userCredential: any) {
+    const user = userCredential.user;
+    console.log('User created:', user.uid);
+    this._snackBar.open('User registered successfully', 'Close', { duration: 3000 } );
+    this.router.navigate(['/list']);
+  }
+
+  /**
+   * Handles failed sign-up actions.
+   */
+  private _signUpFailure() {
+    this._snackBar.open('Registration failed', 'Close', { duration: 3000 } );
+  } 
   
 }

@@ -1,7 +1,7 @@
 /*
 @author    : Ece Caliskan <
 */
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
@@ -13,6 +13,7 @@ import { MaterialModule } from '../../../shared/material-import';
 import { LoginFormType } from '../../../model/form-model';
 import { AuthService } from '../../../service/auth/auth-service';
 import { User } from '../../../model/user-model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -36,6 +37,7 @@ export class Login {
   buttonList: LoginFormType[];
   userLoginFormGroup: FormGroup;
   user: User;
+  private _snackBar = inject(MatSnackBar);
 
   constructor(private router: Router, private authService: AuthService) {
     this.formName = 'Login';
@@ -68,17 +70,38 @@ export class Login {
    * Handles the login action and navigates to the document list page.
    *
    */
-  onLogin() {
+  onLogin(): void {
     this.user.email = this.userLoginFormGroup.value.emailInputCtrl;
     this.user.password = this.userLoginFormGroup.value.passwordInputCtrl;
+    this._connectToAuthService();
+  }
+
+  /**
+   * Connects to the authentication provider to sign in the user.
+   */
+  private _connectToAuthService() {
     this.authService
       .firebaseSignIn(this.user)
       .then((userCredential) => {
-        console.log('Login successful:', userCredential);
-        this.router.navigate(['/list']);
+        this._signInSuccess();
       })
       .catch((error) => {
-        console.error('Login failed:', error);
+        this._signInFailure();
       });
   }
+
+  /**
+   * Handles successful sign-in actions.
+   */
+  private _signInSuccess() {
+    this._snackBar.open('User logged in successfully', 'Close', { duration: 3000 } );
+    this.router.navigate(['/list']);
+  }
+
+  /**
+   * Handles failed sign-in actions.
+   */
+  private _signInFailure() {
+    this._snackBar.open('Login failed', 'Close', { duration: 3000 } );
+  } 
 }
