@@ -24,7 +24,7 @@ import { MatDivider } from '@angular/material/divider';
     MatIconModule,
     MatButtonModule, 
     MatButtonToggleModule,
-    MatTableModule, MatCard, MatPaginatorModule, DocumentUpload, MatDivider
+    MatTableModule, MatCard, MatPaginatorModule, MatDivider
 ],
    exports: [   
     MatStepperModule,
@@ -35,7 +35,7 @@ import { MatDivider } from '@angular/material/divider';
     MatIconModule,
     MatButtonModule, 
     MatButtonToggleModule,
-    MatTableModule, MatCard, MatPaginatorModule, DocumentUpload, MatDivider]
+    MatTableModule, MatCard, MatPaginatorModule, MatDivider]
   
 })
 export class MaterialModule {

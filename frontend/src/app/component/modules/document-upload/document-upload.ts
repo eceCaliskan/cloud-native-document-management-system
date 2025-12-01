@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core'; // <-- Add inject import
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { MaterialModule } from '../../../shared/material-import';
-import { DocumentService } from '../../../service/document-service';
+import { DocumentService } from '../../../service/document/document-service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
