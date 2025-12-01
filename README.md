@@ -48,6 +48,8 @@ https://doi.org/10.1145/3724154.3724177.
 
 ### **Backend (FastAPI)**
 
+Generate Firebase Project -> Settings -> Service Accounts -> Private Key, download the file and put it in the backend folder
+
 ```bash
 cd backend
 pip install -r requirements.txt
