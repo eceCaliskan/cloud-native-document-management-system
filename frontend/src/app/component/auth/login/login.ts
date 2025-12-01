@@ -82,7 +82,9 @@ export class Login {
   private _connectToAuthService() {
     this.authService
       .firebaseSignIn(this.user)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
+        const token =  await userCredential.user.getIdTokenResult(true); // <— refresh token
+        console.log(token); 
         this._signInSuccess();
       })
       .catch((error) => {

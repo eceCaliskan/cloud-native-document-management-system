@@ -91,11 +91,12 @@ export class Register {
    * @param role 
    */
   private _connectToAuthService(role: string) {
-    this.authService.firebaseSignUp(this.user, role).then((userCredential) => {
+    this.authService.firebaseSignUp(this.user, role).then(async (userCredential) => {
+        console.log('User registered:', userCredential.user.uid);
+        this.authService.setUserRole(userCredential.user.uid, role);
+        const token =  await userCredential.user.getIdTokenResult(true); // <— refresh token
+        console.log(token); 
         this._signUpSuccess(userCredential);
-        // You can now send user.uid to your backend to assign roles
-        // example:
-        // this.http.post("/assign-role", { uid: user.uid })
       })
       .catch((error) => {
         this._signUpFailure();
@@ -111,7 +112,7 @@ export class Register {
     const user = userCredential.user;
     console.log('User created:', user.uid);
     this._snackBar.open('User registered successfully', 'Close', { duration: 3000 } );
-    this.router.navigate(['/list']);
+    this.router.navigate(['/']);
   }
 
   /**

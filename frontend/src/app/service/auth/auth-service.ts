@@ -49,4 +49,18 @@ export class AuthService {
     return this.auth.signOut();
   }
    
+  /**
+   * Sets the user role by calling the backend API.
+   * 
+   * @param uuid 
+   * @param user_role 
+   * @returns 
+   */
+  setUserRole(uuid: string, user_role: string): Promise<any> {
+    // Call backend API to set user role
+    const url = `http://localhost:8000/user_role?uuid=${uuid}&user_role=${user_role}`;
+    return fetch(url).then(async response => {
+      response.json()
+    });
+  }
 }
