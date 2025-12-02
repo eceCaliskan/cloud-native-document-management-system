@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { DocumentUpload } from '../document-upload/document-upload';
 import { MaterialModule } from '../../../shared/material-import';
+import { AuthService } from '../../../service/auth/auth-service';
 
 export interface DocumentListInterface {
   projectID: number;
@@ -29,12 +30,14 @@ export class DocumentList {
   filter: { filterLabel: string; placeholder: string };
   dataSource: MatTableDataSource<DocumentListInterface>;
   isUploadSectionOpen: boolean;
+  userRole: string | null 
 
-  constructor() {
+  constructor(private authService: AuthService) {
     this.displayedColumns = ['projectID', 'projectName', 'author', 'actions'];
     this.filter = { filterLabel: 'Filter', placeholder: 'Enter filter text' };
     this.dataSource = new MatTableDataSource(ELEMENT_DATA);
     this.isUploadSectionOpen = false;
+    this.userRole = this.authService.getUserRoleFromLocalStorage();
   }
 
   /**

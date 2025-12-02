@@ -32,9 +32,11 @@
               <mat-icon>cloud_download</mat-icon>
             </button>
             <!--ROLE BASED ACCESS CONTROL-->
-            <button matMiniFab class="ms-3" title="Download Document">
+            @if(userRole === 'admin') {
+            <button matMiniFab class="ms-3" title="Approve Document">
               <mat-icon>done</mat-icon>
             </button>
+            }
           </td>
         }
         </ng-container>

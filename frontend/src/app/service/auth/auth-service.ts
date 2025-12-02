@@ -73,5 +73,14 @@ export class AuthService {
   setUserRoleToLocalStorage(role: string): void {
     localStorage.setItem('user_role', role);
   }
+
+  /**
+   *  Gets the user role from local storage.
+   * 
+   * @returns 
+   */
+  getUserRoleFromLocalStorage(): string | null {
+    return localStorage.getItem('user_role');
+  }
   
 }
