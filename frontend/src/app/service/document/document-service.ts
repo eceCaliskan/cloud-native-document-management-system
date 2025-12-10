@@ -21,12 +21,12 @@ export class DocumentService {
    * @returns Subscription
    */
   uploadFile(file: File, projectName: string, regionPreference: string): Observable<any> {
-    let formData: {file: File, projectName: string, regionPreference: string} = {file, projectName, regionPreference};
-    formData.file = file;
-    formData.projectName = projectName;
-    formData.regionPreference = regionPreference;
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('projectName', projectName);
+    formData.append('regionPreference', regionPreference);
 
-    return this.http.post('/api/documents/upload', formData, {
+    return this.http.post('http://localhost:8000/pdf-upload', formData, {
       reportProgress: true,
       observe: 'events',
     });
